@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="”三峡杯“挺难的，只写了一道Misc的修复条形码的，ZIP明文攻击没写出来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ZIP明文攻击">
+<meta property="og:url" content="http://example.com/2024/12/17/ZIP%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB/index.html">
+<meta property="og:site_name" content="F0T1-CTF">
+<meta property="og:description" content="”三峡杯“挺难的，只写了一道Misc的修复条形码的，ZIP明文攻击没写出来">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217142215731.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217142524787.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217140717737.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217141926937.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217143523212.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217141759220.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217144226735.png">
+<meta property="article:published_time" content="2024-12-17T06:44:00.000Z">
+<meta property="article:modified_time" content="2024-12-17T06:48:48.474Z">
+<meta property="article:author" content="CTF-DUAN">
+<meta property="article:tag" content="Misc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217142215731.png">
+
+<link rel="canonical" href="http://example.com/2024/12/17/ZIP%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ZIP明文攻击 | F0T1-CTF</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">F0T1-CTF</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">从0到1CTFer成长之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/17/ZIP%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
+      <meta itemprop="name" content="CTF-DUAN">
+      <meta itemprop="description" content="CTF学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="F0T1-CTF">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ZIP明文攻击
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-12-17 14:44:00 / 修改时间：14:48:48" itemprop="dateCreated datePublished" datetime="2024-12-17T14:44:00+08:00">2024-12-17</time>
+            </span>
+
+          
+            <div class="post-description">”三峡杯“挺难的，只写了一道Misc的修复条形码的，ZIP明文攻击没写出来</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="ZIP明文攻击"><a href="#ZIP明文攻击" class="headerlink" title="ZIP明文攻击"></a>ZIP明文攻击</h1><p>2024年第八届工业信息安全技能大赛 “三峡杯”工控安全锦标赛 线上初赛Misc-ezmisc writeup</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217142215731.png" alt="image-20241217142215731"></p>
+<p>找一个png图片拖入随波逐流</p>
+<p>文件—读取为16进制</p>
+<p>选择前16字节导出为hex文件 flag.png</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217142524787.png" alt="image-20241217142524787"></p>
+<p>接着进入命令行窗口</p>
+<h2 id="bkcrack攻击"><a href="#bkcrack攻击" class="headerlink" title="bkcrack攻击"></a>bkcrack攻击</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bkcrack -C D:\Misc\flagpng.zip -c flag.png -p D:\Misc\flag.png</span><br><span class="line"></span><br><span class="line">-C 表示指定要处理的压缩文件的路径及文件名 D:\Misc\flagpng.zip</span><br><span class="line">-c 指定在压缩文件内具体解密文件 flag.png</span><br><span class="line">-p 明文文件 D:\Misc\flag.png</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217140717737.png" alt="image-20241217140717737"></p>
+<h2 id="bkcrack解密"><a href="#bkcrack解密" class="headerlink" title="bkcrack解密"></a>bkcrack解密</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bkcrack -C D:\Misc\flagpng.zip -c flag.png -p D:\Misc\flag.png</span><br><span class="line"></span><br><span class="line">Found a solution. Stopping.</span><br><span class="line">You may resume the attack with the option: --continue-attack 563987</span><br><span class="line">[14:05:00] Keys</span><br><span class="line">c8d83b71 f091acf7 62515bb8</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217141926937.png" alt="image-20241217141926937"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bkcrack -C D:\Misc\flagpng.zip -c flag.png -k c8d83b71 f091acf7 62515bb8 -d D:\Misc\1.png</span><br><span class="line"></span><br><span class="line">-k 提供密钥相关的信息</span><br><span class="line">-d 解密或者处理后的输出结果保存的路径及文件名</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217143523212.png" alt="image-20241217143523212"></p>
+<h2 id="脚本处理"><a href="#脚本处理" class="headerlink" title="脚本处理"></a>脚本处理</h2><p>大神说明：<br>PLTE数据块，每个字节判断奇偶数，奇数是0，偶数是1，转换为二进制数</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以二进制格式打开指定路径下的文件（这里是 &#x27;g:/temp/2.png&#x27;），并使用上下文管理器确保文件使用后正确关闭</span></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;1.png&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># 读取整个文件的内容，存储在变量data中，此时data为二进制数据</span></span><br><span class="line">    data = f.read()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从文件数据中提取颜色板（plte）信息，按照指定的起始位置（十六进制0x29）和长度（十六进制0x300）来提取</span></span><br><span class="line">plte = data[<span class="number">0x29</span>:<span class="number">0x29</span> + <span class="number">0x300</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化一个空列表，用于后续存储根据像素值转换后的二进制字符串</span></span><br><span class="line">d = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历颜色板中的每一个像素值</span></span><br><span class="line"><span class="keyword">for</span> p <span class="keyword">in</span> plte:</span><br><span class="line">    <span class="comment"># 通过位与运算（&amp; 1）判断像素值的最低位是1还是0，若是1则添加&#x27;1&#x27;到列表d中，否则添加&#x27;0&#x27;</span></span><br><span class="line">    d.append(<span class="string">&#x27;1&#x27;</span> <span class="keyword">if</span> p &amp; <span class="number">1</span> <span class="keyword">else</span> <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将列表d中的所有字符串元素连接起来，形成一个完整的二进制字符串，并打印输出该结果</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.join(d))</span><br><span class="line"></span><br><span class="line"><span class="comment">#01100110011011000110000101100111011110110111000001001100001101110011001101011111011100000100111000111001010111110011000100110101010111110011000101101110001101110011001101010010001100110011010100110111001100010100111001111101010110001110111010011000001111000101001010000101110110011001110011110101111000010110000111110001001010011100000001000000100001111001111000010100011101011110011101111010000111001011110001011010100100010111001110111111001110010011010111101110011011011011001001111011110110000110100011010101101000110111010001101010111110010101111010001101101000110000110111100110011010100100001011110000100111011111110000000101111011111010100011000111011000010101111111000110001001100101001100110100011110111001010010011001010100010100000110110110011101111001100</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217141759220.png" alt="image-20241217141759220"></p>
+<h1 id="附件以及题目介绍"><a href="#附件以及题目介绍" class="headerlink" title="附件以及题目介绍"></a>附件以及题目介绍</h1><p><a target="_blank" rel="noopener" href="https://github.com/CTF-Archives/2024-sanxia">https://github.com/CTF-Archives/2024-sanxia</a></p>
+<hr>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20241217144226735.png" alt="image-20241217144226735"></p>
+<h1 id="参考WP"><a href="#参考WP" class="headerlink" title="参考WP"></a>参考WP</h1><p> 公众号：长弓三皮</p>
+<hr>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/qsNfkXvpWbv_0hVx1K4ctA">https://mp.weixin.qq.com/s/qsNfkXvpWbv_0hVx1K4ctA</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+             <a href="/tags/Misc/" <i class="fa fa-tag"></i> Misc</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/12/16/%E5%A5%BD%E7%94%A8%E8%BD%AF%E4%BB%B6%E6%94%B6%E9%9B%86/" rel="prev" title="CTF利器收集">
+      <i class="fa fa-chevron-left"></i> CTF利器收集
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ZIP%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB"><span class="nav-number">1.</span> <span class="nav-text">ZIP明文攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bkcrack%E6%94%BB%E5%87%BB"><span class="nav-number">1.1.</span> <span class="nav-text">bkcrack攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bkcrack%E8%A7%A3%E5%AF%86"><span class="nav-number">1.2.</span> <span class="nav-text">bkcrack解密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%84%9A%E6%9C%AC%E5%A4%84%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">脚本处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%84%E4%BB%B6%E4%BB%A5%E5%8F%8A%E9%A2%98%E7%9B%AE%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.</span> <span class="nav-text">附件以及题目介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83WP"><span class="nav-number">3.</span> <span class="nav-text">参考WP</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CTF-DUAN"
+      src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
+  <p class="site-author-name" itemprop="name">CTF-DUAN</p>
+  <div class="site-description" itemprop="description">CTF学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CTF-DUAN</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>  -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
