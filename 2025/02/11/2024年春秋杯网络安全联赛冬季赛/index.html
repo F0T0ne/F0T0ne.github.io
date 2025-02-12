@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="第一天题目比较基础，第二天基本都是流量分析，第三天难度更上一层">
+<meta property="og:type" content="article">
+<meta property="og:title" content="i春秋冬季赛-2024-WP">
+<meta property="og:url" content="http://example.com/2025/02/11/2024%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9B/index.html">
+<meta property="og:site_name" content="F0T1-CTF">
+<meta property="og:description" content="第一天题目比较基础，第二天基本都是流量分析，第三天难度更上一层">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127201227569.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250120113207278.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127195251015.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117114551385.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117114427522.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117114702700.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117115350047.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117133931886.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117134103346.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117134135113.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117134212523.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117141652808.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127210214601.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127210451557.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127212710407.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127213329941.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127213536419.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127213839716.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127203702116.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127203844611.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127204935277.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127205052220.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127195401548.png">
+<meta property="og:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127195942051.png">
+<meta property="article:published_time" content="2025-02-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-02-11T08:29:17.954Z">
+<meta property="article:author" content="CTF-DUAN">
+<meta property="article:tag" content="Wp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127201227569.png">
+
+<link rel="canonical" href="http://example.com/2025/02/11/2024%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>i春秋冬季赛-2024-WP | F0T1-CTF</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">F0T1-CTF</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">从0到1CTFer成长之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/11/2024%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
+      <meta itemprop="name" content="CTF-DUAN">
+      <meta itemprop="description" content="CTF学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="F0T1-CTF">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          i春秋冬季赛-2024-WP
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-02-11 00:00:00 / 修改时间：16:29:17" itemprop="dateCreated datePublished" datetime="2025-02-11T00:00:00+08:00">2025-02-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Wp/" itemprop="url" rel="index"><span itemprop="name">Wp</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">第一天题目比较基础，第二天基本都是流量分析，第三天难度更上一层</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="2024年春秋杯网络安全联赛冬季赛"><a href="#2024年春秋杯网络安全联赛冬季赛" class="headerlink" title="2024年春秋杯网络安全联赛冬季赛"></a><em>2024年春秋杯网络安全联赛冬季赛</em></h1><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127201227569.png" alt="image-20250127201227569"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250120113207278.png" alt="image-20250120113207278"></p>
+<h2 id="Day1"><a href="#Day1" class="headerlink" title="Day1"></a>Day1</h2><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127195251015.png" alt="image-20250127195251015"></p>
+<h3 id="简单算术"><a href="#简单算术" class="headerlink" title="简单算术"></a>简单算术</h3><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117114551385.png" alt="image-20250117114551385"></p>
+<p>题目提示要异或</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117114427522.png" alt="image-20250117114427522"></p>
+<h3 id="See-anything-in-these-pics"><a href="#See-anything-in-these-pics" class="headerlink" title="See anything in these pics?"></a>See anything in these pics?</h3><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117114702700.png" alt="image-20250117114702700"></p>
+<p>解压后看到不是二维码，提示是Aztec码，直接扫描即可</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117115350047.png" alt="image-20250117115350047"></p>
+<p>解压压缩包，获得jpg图片</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117133931886.png" alt="image-20250117133931886"></p>
+<p>发现里边还有一张png图片</p>
+<p>foremost提取</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117134103346.png" alt="image-20250117134103346"></p>
+<p>图片宽高可能被修改</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117134135113.png" alt="image-20250117134135113"></p>
+<p>爆破宽高后获得flag</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117134212523.png" alt="image-20250117134212523"></p>
+<h3 id="压力大，写个脚本吧"><a href="#压力大，写个脚本吧" class="headerlink" title="压力大，写个脚本吧"></a>压力大，写个脚本吧</h3><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250117141652808.png" alt="image-20250117141652808"></p>
+<p>让AI写脚本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">代码流程：</span><br><span class="line">初始解压：直接解压 zip_100.zip，因为它没有密码。</span><br><span class="line">读取密码：从 password_99.txt 中获取 Base64 编码的密码。</span><br><span class="line">解压下一个压缩包：使用解码后的密码解压 zip_99.zip。</span><br><span class="line">zip_99.zip获取zip_98.zip和 password_98.txt</span><br><span class="line">从 password_98.txt 中获取 Base64 编码的密码。</span><br><span class="line">解压下一个压缩包</span><br><span class="line">继续递推：一直重复解压，直到没有更多的压缩包。</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> zipfile</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">extract_zip</span>(<span class="params">zip_num</span>):</span><br><span class="line">    <span class="comment"># 处理第一个无密码的zip</span></span><br><span class="line">    <span class="keyword">if</span> zip_num == <span class="number">100</span>:</span><br><span class="line">        <span class="keyword">with</span> zipfile.ZipFile(<span class="string">f&#x27;zip_<span class="subst">&#123;zip_num&#125;</span>.zip&#x27;</span>) <span class="keyword">as</span> zf:</span><br><span class="line">            zf.extractall()</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 读取密码文件</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&#x27;password_<span class="subst">&#123;zip_num&#125;</span>.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            pwd = base64.b64decode(f.read().strip())</span><br><span class="line">            </span><br><span class="line">        <span class="comment"># 解压当前zip文件</span></span><br><span class="line">        <span class="keyword">with</span> zipfile.ZipFile(<span class="string">f&#x27;zip_<span class="subst">&#123;zip_num&#125;</span>.zip&#x27;</span>) <span class="keyword">as</span> zf:</span><br><span class="line">            zf.extractall(pwd=pwd)</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;Error processing zip_<span class="subst">&#123;zip_num&#125;</span>: <span class="subst">&#123;<span class="built_in">str</span>(e)&#125;</span>&#x27;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="comment"># 从100开始往下解压</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;Processing zip_<span class="subst">&#123;i&#125;</span>...&#x27;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> extract_zip(i):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">            </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Finished!&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+
+<p>上脚本对嵌套压缩包进行解密</p>
+<p>获得flag-hint</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127210214601.png" alt="image-20250127210214601"></p>
+<p>将password-0.txt进行base解码</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127210451557.png" alt="image-20250127210451557"></p>
+<p>password-0.txt解码后为png文件头</p>
+<p>说明要将password从0开始解密后拼凑为png</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127212710407.png" alt="image-20250127212710407"></p>
+<p>剔除后边的FG就是完整的png了</p>
+<p>去掉后16进制数据是符合png图片了，但应该转为字节才能看到图片</p>
+<p>发给AI修改脚本</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127213329941.png" alt="image-20250127213329941"></p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127213536419.png" alt="image-20250127213536419"></p>
+<p>太棒了，直接就能把多余部分提除了，不愧是Cursor</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127213839716.png" alt="image-20250127213839716"></p>
+<p>直接就能扫出flag了</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read_and_decode</span>():</span><br><span class="line">    combined_data = <span class="string">b&#x27;&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 读取password_0.txt到password_99.txt</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>):</span><br><span class="line">        filename = <span class="string">f&#x27;password_<span class="subst">&#123;i&#125;</span>.txt&#x27;</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">with</span> <span class="built_in">open</span>(filename, <span class="string">&#x27;r&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">                <span class="comment"># 读取base64数据</span></span><br><span class="line">                base64_data = f.read().strip()</span><br><span class="line">                <span class="comment"># 解码base64数据得到16进制字符串</span></span><br><span class="line">                hex_str = base64.b64decode(base64_data).decode(<span class="string">&#x27;ascii&#x27;</span>)</span><br><span class="line">                <span class="comment"># 将16进制字符串转换为字节</span></span><br><span class="line">                decoded_bytes = binascii.unhexlify(hex_str)</span><br><span class="line">                <span class="comment"># 拼接数据</span></span><br><span class="line">                combined_data += decoded_bytes</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;Successfully processed <span class="subst">&#123;filename&#125;</span>&quot;</span>)</span><br><span class="line">                <span class="comment"># 打印前几个字节用于调试</span></span><br><span class="line">                <span class="built_in">print</span>(<span class="string">f&quot;First few bytes: <span class="subst">&#123;decoded_bytes[:<span class="number">8</span>].<span class="built_in">hex</span>()&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">except</span> FileNotFoundError:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;File not found: <span class="subst">&#123;filename&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;Error processing <span class="subst">&#123;filename&#125;</span>: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 检查PNG文件头</span></span><br><span class="line">    <span class="keyword">if</span> combined_data.startswith(<span class="string">b&#x27;\x89PNG\r\n\x1a\n&#x27;</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Valid PNG header detected!&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 将拼接的数据写入PNG文件</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;output.png&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(combined_data)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Successfully created output.png&quot;</span>)</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;Error writing output file: <span class="subst">&#123;e&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行程序</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Starting to process files...&quot;</span>)</span><br><span class="line">read_and_decode()</span><br></pre></td></tr></table></figure>
+
+<h3 id="简单镜像提取"><a href="#简单镜像提取" class="headerlink" title="简单镜像提取"></a>简单镜像提取</h3><p>题目给的是一个流量包</p>
+<p>导出HTTP对象</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127203702116.png" alt="image-20250127203702116"></p>
+<p>追踪HTTP流</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127203844611.png" alt="image-20250127203844611"></p>
+<p>看到压缩包文件</p>
+<p>导出后要剔除多余部分才能保存为压缩包打开</p>
+<p>修改几次一直失败</p>
+<p>想到foremost能够直接分离</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127204935277.png" alt="image-20250127204935277"></p>
+<p>压缩包中是img镜像</p>
+<p>根据提示使用R-STUDIO恢复</p>
+<p>打开后excel表中包含着flag</p>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127205052220.png" alt="image-20250127205052220"></p>
+<h2 id="Day2"><a href="#Day2" class="headerlink" title="Day2"></a>Day2</h2><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127195401548.png" alt="image-20250127195401548"></p>
+<h3 id="Weevil’s-Whisper"><a href="#Weevil’s-Whisper" class="headerlink" title="Weevil’s Whisper"></a>Weevil’s Whisper</h3><h2 id="Day3"><a href="#Day3" class="headerlink" title="Day3"></a>Day3</h2><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20250127195942051.png" alt="image-20250127195942051"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+             <a href="/tags/Wp/" <i class="fa fa-tag"></i> Wp</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/01/14/Solar%E6%9D%AF-WP/" rel="prev" title="Solar杯内存取证">
+      <i class="fa fa-chevron-left"></i> Solar杯内存取证
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2024%E5%B9%B4%E6%98%A5%E7%A7%8B%E6%9D%AF%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E8%81%94%E8%B5%9B%E5%86%AC%E5%AD%A3%E8%B5%9B"><span class="nav-number">1.</span> <span class="nav-text">2024年春秋杯网络安全联赛冬季赛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Day1"><span class="nav-number">1.1.</span> <span class="nav-text">Day1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%AE%97%E6%9C%AF"><span class="nav-number">1.1.1.</span> <span class="nav-text">简单算术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#See-anything-in-these-pics"><span class="nav-number">1.1.2.</span> <span class="nav-text">See anything in these pics?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%8B%E5%8A%9B%E5%A4%A7%EF%BC%8C%E5%86%99%E4%B8%AA%E8%84%9A%E6%9C%AC%E5%90%A7"><span class="nav-number">1.1.3.</span> <span class="nav-text">压力大，写个脚本吧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E9%95%9C%E5%83%8F%E6%8F%90%E5%8F%96"><span class="nav-number">1.1.4.</span> <span class="nav-text">简单镜像提取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day2"><span class="nav-number">1.2.</span> <span class="nav-text">Day2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Weevil%E2%80%99s-Whisper"><span class="nav-number">1.2.1.</span> <span class="nav-text">Weevil’s Whisper</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day3"><span class="nav-number">1.3.</span> <span class="nav-text">Day3</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CTF-DUAN"
+      src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
+  <p class="site-author-name" itemprop="name">CTF-DUAN</p>
+  <div class="site-description" itemprop="description">CTF学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CTF-DUAN</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>  -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
