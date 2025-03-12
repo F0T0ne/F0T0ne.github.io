@@ -20,31 +20,42 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="CTF学习">
-<meta property="og:type" content="website">
-<meta property="og:title" content="F0T1-CTF">
-<meta property="og:url" content="http://example.com/page/2/index.html">
+  <meta name="description" content="记录一下vue.js的学习过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue.js 开发基础">
+<meta property="og:url" content="http://example.com/2025/03/12/Vue.js%20%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="F0T1-CTF">
-<meta property="og:description" content="CTF学习">
+<meta property="og:description" content="记录一下vue.js的学习过程">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312203952425.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312204628116.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312204742856.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312204753387.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312210310651.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312210423942.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312210520463.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312210600923.png">
+<meta property="article:published_time" content="2025-03-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-03-12T13:20:47.212Z">
 <meta property="article:author" content="CTF-DUAN">
-<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Vue.js">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312203952425.png">
 
-<link rel="canonical" href="http://example.com/page/2/">
+<link rel="canonical" href="http://example.com/2025/03/12/Vue.js%20%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>F0T1-CTF</title>
+  <title>Vue.js 开发基础 | F0T1-CTF</title>
   
 
 
@@ -181,57 +192,14 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
 
-<div class="tag-cloud">
-	  <div class="tag-cloud-tags" id="tags">
-		<a href="/tags/MISC/" style="font-size: 16px; color: #fff">MISC</a> <a href="/tags/Vue-js/" style="font-size: 16px; color: #fff">Vue.js</a> <a href="/tags/WP/" style="font-size: 16px; color: #fff">WP</a> <a href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" style="font-size: 16px; color: #fff">博客搭建</a> <a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" style="font-size: 16px; color: #fff">应急响应</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 16px; color: #fff">总结</a> <a href="/tags/%E6%8A%80%E5%B7%A7/" style="font-size: 16px; color: #fff">技巧</a> <a href="/tags/%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/" style="font-size: 16px; color: #fff">流量分析</a> <a href="/tags/%E6%BF%80%E6%B4%BB%E7%B3%BB%E7%BB%9F/" style="font-size: 16px; color: #fff">激活系统</a>
-	  </div>
-	</div>
-	<br>
-	
-	<script type="text/javascript">
-     var alltags = document.getElementsByClassName('tag-cloud-tags');
-     var tags = alltags[0].getElementsByTagName('a');
-     for (var i = tags.length - 1; i >= 0; i--) {
-       var r=Math.floor(Math.random()*75+130);
-       var g=Math.floor(Math.random()*75+100);
-       var b=Math.floor(Math.random()*75+80);
-       tags[i].style.background = "rgb("+r+","+g+","+b+")";
-     }
-</script>
-
-<style>
-  .tag-cloud-tags{
-    /*font-family: Helvetica, Tahoma, Arial;*/
-    /*font-weight: 100;*/
-    text-align: center;
-    counter-reset: tags;
-  }
-  .tag-cloud-tags a{
-    border-radius: 6px;
-    padding-right: 5px;
-    padding-left: 5px;
-    margin: 8px 5px 0px 0px;
-  }
-  .tag-cloud-tags a:before{
-    content: "?";
-  }
-
-  .tag-cloud-tags a:hover{
-     box-shadow: 0px 5px 15px 0px rgba(0,0,0,.4);
-     transform: scale(1.1);
-     /*box-shadow: 10px 10px 15px 2px rgba(0,0,0,.12), 0 0 6px 0 rgba(104, 104, 105, 0.1);*/
-     transition-duration: 0.15s;
-  }
-</style>
-
-      
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/02/%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA---%E4%B8%80%E6%AD%A5%E5%88%B0%E4%BD%8D/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/12/Vue.js%20%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
@@ -243,10 +211,9 @@
       <meta itemprop="name" content="F0T1-CTF">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/11/02/%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA---%E4%B8%80%E6%AD%A5%E5%88%B0%E4%BD%8D/" class="post-title-link" itemprop="url">图床搭建--联动Typro</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Vue.js 开发基础
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -254,18 +221,22 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2024-11-02 00:00:00" itemprop="dateCreated datePublished" datetime="2024-11-02T00:00:00+08:00">2024-11-02</time>
+              <time title="创建时间：2025-03-12 00:00:00 / 修改时间：21:20:47" itemprop="dateCreated datePublished" datetime="2025-03-12T00:00:00+08:00">2025-03-12</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-11-08 21:10:17" itemprop="dateModified" datetime="2024-11-08T21:10:17+08:00">2024-11-08</time>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
               </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue-js/" itemprop="url" rel="index"><span itemprop="name">Vue.js</span></a>
+                </span>
+            </span>
 
           
+            <div class="post-description">记录一下vue.js的学习过程</div>
 
         </div>
       </header>
@@ -276,178 +247,51 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>通过结合 Typro 和 GitHub，使用 PicGo 插件，轻松实现一键搭建高效、美观的图床。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/11/02/%E5%9B%BE%E5%BA%8A%E6%90%AD%E5%BB%BA---%E4%B8%80%E6%AD%A5%E5%88%B0%E4%BD%8D/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+        <h1 id="Vue-js-开发基础"><a href="#Vue-js-开发基础" class="headerlink" title="Vue.js 开发基础"></a>Vue.js 开发基础</h1><h2 id="单文件组件"><a href="#单文件组件" class="headerlink" title="单文件组件"></a>单文件组件</h2><p>首先执行以下命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yarn create vite vue-demo --template vue</span><br><span class="line">#创建项目</span><br><span class="line">cd vue-demo</span><br><span class="line">#进入项目</span><br><span class="line">yarn</span><br><span class="line">yarn dev</span><br><span class="line">#启动项目</span><br></pre></td></tr></table></figure>
+
+<p>接着将文件用VScode打开</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312203952425.png" alt="image-20250312203952425"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312204628116.png" alt="image-20250312204628116"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312204742856.png" alt="image-20250312204742856"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312204753387.png" alt="image-20250312204753387"></p>
+<h2 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h2><h3 id="响应式数据绑定"><a href="#响应式数据绑定" class="headerlink" title="响应式数据绑定"></a>响应式数据绑定</h3><p>​	响应式数据绑定是建立数据与UI间动态联系，数据变化时UI自动更新，UI操作改变数据也会同步更新。</p>
+<p>​	 Vue 3中用于定义响应式数据的函数有：<code>reactive</code>创建响应式对象；<code>ref</code>创建响应式引用；<code>toRef</code>为响应式对象属性创建响应式引用；<code>toRefs</code>将响应式对象转为含响应式引用的普通对象。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312210310651.png" alt="image-20250312210310651"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &#123;&#123; obj.msg &#125;&#125;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script setup&gt;</span><br><span class="line">import &#123; reactive &#125; from &#x27;vue&#x27;</span><br><span class="line">const obj = reactive(&#123;</span><br><span class="line">    msg: &#x27;不畏浮云遮望眼，只缘身在最高层&#x27;</span><br><span class="line">&#125;)</span><br><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">    obj.msg = &#x27;欲穷千里目，更上一层楼&#x27;</span><br><span class="line">&#125;, 2000)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312210423942.png" alt="image-20250312210423942"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312210520463.png" alt="image-20250312210520463"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250312210600923.png" alt="image-20250312210600923"></p>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+             <a href="/tags/Vue-js/" <i class="fa fa-tag"></i> Vue.js</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/10/30/Windows%E4%BC%81%E4%B8%9A%E7%89%88%E6%BF%80%E6%B4%BB%E6%95%99%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
-      <meta itemprop="name" content="CTF-DUAN">
-      <meta itemprop="description" content="CTF学习">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="F0T1-CTF">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/10/30/Windows%E4%BC%81%E4%B8%9A%E7%89%88%E6%BF%80%E6%B4%BB%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">Windows激活教程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-10-30 00:00:00" itemprop="dateCreated datePublished" datetime="2024-10-30T00:00:00+08:00">2024-10-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-11-22 13:05:36" itemprop="dateModified" datetime="2024-11-22T13:05:36+08:00">2024-11-22</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简单记录一下win系统激活教程--采用KMS（四句话一键激活）</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/10/30/Windows%E4%BC%81%E4%B8%9A%E7%89%88%E6%BF%80%E6%B4%BB%E6%95%99%E7%A8%8B/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/10/27/%E5%B0%81%E7%A5%9E%E5%8F%B0-MiscWP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
-      <meta itemprop="name" content="CTF-DUAN">
-      <meta itemprop="description" content="CTF学习">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="F0T1-CTF">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2024/10/27/%E5%B0%81%E7%A5%9E%E5%8F%B0-MiscWP/" class="post-title-link" itemprop="url">封神台-MiscWP</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2024-10-27 21:26:04" itemprop="dateCreated datePublished" datetime="2024-10-27T21:26:04+08:00">2024-10-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2025-02-12 10:51:28" itemprop="dateModified" datetime="2025-02-12T10:51:28+08:00">2025-02-12</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>简单记录一下封神台中部分比较有意思的 Misc 题目</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/10/27/%E5%B0%81%E7%A5%9E%E5%8F%B0-MiscWP/">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/02/12/2024%E6%AF%94%E8%B5%9B%E5%9B%9E%E9%A1%BE/" rel="prev" title="2024比赛概览">
+      <i class="fa fa-chevron-left"></i> 2024比赛概览
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
   
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
 
 
 
@@ -499,6 +343,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue-js-%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Vue.js 开发基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E6%96%87%E4%BB%B6%E7%BB%84%E4%BB%B6"><span class="nav-number">1.1.</span> <span class="nav-text">单文件组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="nav-number">1.2.</span> <span class="nav-text">数据绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%BC%8F%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">响应式数据绑定</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
