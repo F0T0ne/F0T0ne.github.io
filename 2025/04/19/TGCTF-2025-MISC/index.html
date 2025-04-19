@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="TGCTF题目非常棒！！！取证，压缩包，图片隐写，题目质量都很高">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TGCTF-2025 &amp; Misc">
+<meta property="og:url" content="http://example.com/2025/04/19/TGCTF-2025-MISC/index.html">
+<meta property="og:site_name" content="F0T1-CTF">
+<meta property="og:description" content="TGCTF题目非常棒！！！取证，压缩包，图片隐写，题目质量都很高">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/media">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250417213510900.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250417215206159.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419121408944.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250417220234711.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419120425425.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419120542666.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419120500010.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419120949832.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419201252913.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419174717649.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419174500454.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419174533816.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419180435183.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419202135566.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419211408190.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419210708657.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419210824364.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419210850145.png">
+<meta property="article:published_time" content="2025-04-19T12:44:00.000Z">
+<meta property="article:modified_time" content="2025-04-19T13:41:14.438Z">
+<meta property="article:author" content="CTF-DUAN">
+<meta property="article:tag" content="WP">
+<meta property="article:tag" content="MISC">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/media">
+
+<link rel="canonical" href="http://example.com/2025/04/19/TGCTF-2025-MISC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>TGCTF-2025 & Misc | F0T1-CTF</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">F0T1-CTF</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">从0到1CTFer成长之路</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/19/TGCTF-2025-MISC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
+      <meta itemprop="name" content="CTF-DUAN">
+      <meta itemprop="description" content="CTF学习">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="F0T1-CTF">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          TGCTF-2025 & Misc
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-04-19 20:44:00 / 修改时间：21:41:14" itemprop="dateCreated datePublished" datetime="2025-04-19T20:44:00+08:00">2025-04-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MISC/" itemprop="url" rel="index"><span itemprop="name">MISC</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MISC/WP/" itemprop="url" rel="index"><span itemprop="name">WP</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">TGCTF题目非常棒！！！取证，压缩包，图片隐写，题目质量都很高</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="TGCTF-2025-MISC"><a href="#TGCTF-2025-MISC" class="headerlink" title="TGCTF-2025-MISC"></a>TGCTF-2025-MISC</h1><p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/media" alt="img"></p>
+<h2 id="next-is-the-end"><a href="#next-is-the-end" class="headerlink" title="next is the end"></a>next is the end</h2><p>文件夹嵌套问题，everything最简单</p>
+<p>直接放到C盘根目录，方便查找</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250417213510900.png" alt="image-20250417213510900"></p>
+<h2 id="你能发现图中的秘密吗"><a href="#你能发现图中的秘密吗" class="headerlink" title="你能发现图中的秘密吗"></a>你能发现图中的秘密吗</h2><p>题目给了一个图片一个压缩包</p>
+<p>压缩包加密了，也许密码在图片中</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250417215206159.png" alt="image-20250417215206159"></p>
+<p>直接进随波逐流就看到了</p>
+<p>解密获得一张png和一个PDF</p>
+<p>将pdf文件拖进随波逐流查看</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419121408944.png" alt="image-20250419121408944"></p>
+<p>被PS修改过，拖进PS，看到两个图层</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250417220234711.png" alt="image-20250417220234711"></p>
+<p>接着看png，在010中找到一个异常大的数据块</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419120425425.png" alt="image-20250419120425425"></p>
+<p>新建文件将png前两部分添加到idat块中（选中后左下角看到21h，插入21字节即可）</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419120542666.png" alt="image-20250419120542666"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419120500010.png" alt="image-20250419120500010"></p>
+<p>看到图片有显示，拖到PZ中修复宽高</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419120949832.png" alt="image-20250419120949832"></p>
+<h2 id="这是啥"><a href="#这是啥" class="headerlink" title="这是啥"></a>这是啥</h2><p>解压文件，010看到是gif，改后缀</p>
+<p>gif分解帧，在PZ中还有GIF帧间隔提取</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a=[<span class="string">&#x27;840&#x27;</span>, <span class="string">&#x27;710&#x27;</span>, <span class="string">&#x27;670&#x27;</span>, <span class="string">&#x27;840&#x27;</span>, <span class="string">&#x27;700&#x27;</span>, <span class="string">&#x27;1230&#x27;</span>, <span class="string">&#x27;890&#x27;</span>, <span class="string">&#x27;1110&#x27;</span>, <span class="string">&#x27;1170&#x27;</span>, <span class="string">&#x27;950&#x27;</span>, <span class="string">&#x27;990&#x27;</span>, <span class="string">&#x27;970&#x27;</span>, <span class="string">&#x27;1170&#x27;</span>, <span class="string">&#x27;1030&#x27;</span>, <span class="string">&#x27;1040&#x27;</span>, <span class="string">&#x27;1160&#x27;</span>, <span class="string">&#x27;950&#x27;</span>, <span class="string">&#x27;1170&#x27;</span>, <span class="string">&#x27;1120&#x27;</span>, <span class="string">&#x27;950&#x27;</span>, <span class="string">&#x27;1190&#x27;</span>, <span class="string">&#x27;1050&#x27;</span>, <span class="string">&#x27;1160&#x27;</span>, <span class="string">&#x27;1040&#x27;</span>, <span class="string">&#x27;950&#x27;</span>, <span class="string">&#x27;1160&#x27;</span>, <span class="string">&#x27;1050&#x27;</span>, <span class="string">&#x27;1090&#x27;</span>, <span class="string">&#x27;1010&#x27;</span>, <span class="string">&#x27;330&#x27;</span>, <span class="string">&#x27;1250&#x27;</span>]</span><br><span class="line">s=<span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> a:</span><br><span class="line">    s+=<span class="built_in">chr</span>(<span class="built_in">int</span>(i)//<span class="number">10</span>)</span><br><span class="line">    <span class="comment">#明显超过ASCLL码表示范围，除10就在范围内了</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br><span class="line"><span class="comment">#TGCTF&#123;You_caught_up_with_time!&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>其实分解帧后还要进行汉信码拼接，使用PS拼接好些，不然扫不出来</p>
+<p> time is your fortune ,efficiency is your life</p>
+<p>解码提示与时间有关系，就是GIF帧间隔</p>
+<h2 id="TeamGipsy-ctfer"><a href="#TeamGipsy-ctfer" class="headerlink" title="TeamGipsy&amp;ctfer"></a>TeamGipsy&amp;ctfer</h2><h3 id="硬搜"><a href="#硬搜" class="headerlink" title="硬搜"></a>硬搜</h3><p>赛后在群里见大佬操作的</p>
+<p>效率杠杆的！！！</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419201252913.png" alt="image-20250419201252913"></p>
+<h3 id="R-studio"><a href="#R-studio" class="headerlink" title="R-studio"></a>R-studio</h3><p>首先进去看home目录</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419174717649.png" alt="image-20250419174717649"></p>
+<p>在桌面找到mima.txt</p>
+<p>内容显示：使用两个Docker起了一个mysql服务</p>
+<p>Linux中拉取 MySQL 镜像时，该镜像会被存储在 “&#x2F;var&#x2F;lib&#x2F;docker&#x2F;image&#x2F;” 子目录下</p>
+<p>去&#x2F;var&#x2F;lib&#x2F;docker目录下查找包含mysql的文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419174500454.png" alt="image-20250419174500454"></p>
+<p>利用正则查找包含mysql的文件</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419174533816.png" alt="image-20250419174533816"></p>
+<p>在.mysql_history中找到</p>
+<h3 id="常规"><a href="#常规" class="headerlink" title="常规"></a>常规</h3><p>用vm打开需要密码，给了用户名hznuctfer，接着去重置密码</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419180435183.png" alt="image-20250419180435183"></p>
+<p>进入桌面找到mima.txt</p>
+<p>按照命令重新运行Docker，接着进入mysql查找即可</p>
+<p>我不太会docker，起起来的mysql中没有TeamGipsy库，就不继续了</p>
+<h2 id="ez-zip"><a href="#ez-zip" class="headerlink" title="ez_zip"></a>ez_zip</h2><p>压缩包密码为20250412，即比赛日期</p>
+<p>8位数字，爆破的话得花点时间</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419202135566.png" alt="image-20250419202135566"></p>
+<p>很明显的明文攻击，但给出的明文要进行sh512加密</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Awesome,you_are_so_good</span><br><span class="line">0894fb7edcf85585e8749faeac3c7adf4247ae49b50cc55c4dd5eead0a9be60b7d848baece2ee65273d110317be4fe709c4b2bdeab48a212ca741e989df39963</span><br></pre></td></tr></table></figure>
+
+<p>加密后sh512.txt大小才与压缩包中密文一致</p>
+<h3 id="ARCHPR"><a href="#ARCHPR" class="headerlink" title="ARCHPR"></a>ARCHPR</h3><p>可以使用ARCHPR进行明文攻击，攻击几分钟获得秘钥即可解密</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419211408190.png" alt="image-20250419211408190"></p>
+<h3 id="bkcrack"><a href="#bkcrack" class="headerlink" title="bkcrack"></a>bkcrack</h3><p>或者使用bkcrack进行解密</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">bkcrack -C End.zip -c End/sh512.txt -P sh512.zip -p sh512.txt</span><br><span class="line">bkcrack 1.7.1 - 2024-12-21</span><br><span class="line">[20:55:30] Z reduction using 77 bytes of known plaintext</span><br><span class="line">100.0 % (77 / 77)</span><br><span class="line">[20:55:30] Attack on 102228 Z values at index 6</span><br><span class="line">Keys: b39bc130 8183a9f1 d5381ad8</span><br><span class="line">29.2 % (29814 / 102228)</span><br><span class="line">Found a solution. Stopping.</span><br><span class="line">You may resume the attack with the option: --continue-attack 29814</span><br><span class="line">[20:56:27] Keys</span><br><span class="line">b39bc130 8183a9f1 d5381ad8</span><br></pre></td></tr></table></figure>
+
+<p>记住，<code>bkcrack</code> 是一个跨平台的工具，为了确保在不同操作系统上都能正常使用，它遵循了使用正斜杠 <code>/</code> 作为路径分隔符的标准。因此，在使用 <code>bkcrack</code> 时，无论什么系统，都应该使用正斜杠来指定文件路径。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bkcrack -C End.zip -k b39bc130 8183a9f1 d5381ad8 -U new.zip duan</span><br><span class="line">bkcrack 1.7.1 - 2024-12-21</span><br><span class="line">[21:00:21] Writing unlocked archive new.zip with password &quot;duan&quot;</span><br><span class="line">100.0 % (2 / 2)</span><br><span class="line">Wrote unlocked archive.</span><br></pre></td></tr></table></figure>
+
+<p>重设密码，解压</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419210708657.png" alt="image-20250419210708657"></p>
+<p>进010进行修改</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419210824364.png" alt="image-20250419210824364"></p>
+<p>修改后文件正常显示，能够获得flag</p>
+<p><img src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/image-20250419210850145.png" alt="image-20250419210850145"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+             <a href="/tags/WP/" <i class="fa fa-tag"></i> WP</a>
+             <a href="/tags/MISC/" <i class="fa fa-tag"></i> MISC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/03/25/PolarCTF-2025-%E5%A4%8D%E7%8E%B0/" rel="prev" title="PolarCTF 2025春季赛 & Web">
+      <i class="fa fa-chevron-left"></i> PolarCTF 2025春季赛 & Web
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#TGCTF-2025-MISC"><span class="nav-number">1.</span> <span class="nav-text">TGCTF-2025-MISC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#next-is-the-end"><span class="nav-number">1.1.</span> <span class="nav-text">next is the end</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%A0%E8%83%BD%E5%8F%91%E7%8E%B0%E5%9B%BE%E4%B8%AD%E7%9A%84%E7%A7%98%E5%AF%86%E5%90%97"><span class="nav-number">1.2.</span> <span class="nav-text">你能发现图中的秘密吗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%99%E6%98%AF%E5%95%A5"><span class="nav-number">1.3.</span> <span class="nav-text">这是啥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TeamGipsy-ctfer"><span class="nav-number">1.4.</span> <span class="nav-text">TeamGipsy&amp;ctfer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A1%AC%E6%90%9C"><span class="nav-number">1.4.1.</span> <span class="nav-text">硬搜</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R-studio"><span class="nav-number">1.4.2.</span> <span class="nav-text">R-studio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%84"><span class="nav-number">1.4.3.</span> <span class="nav-text">常规</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ez-zip"><span class="nav-number">1.5.</span> <span class="nav-text">ez_zip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ARCHPR"><span class="nav-number">1.5.1.</span> <span class="nav-text">ARCHPR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bkcrack"><span class="nav-number">1.5.2.</span> <span class="nav-text">bkcrack</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CTF-DUAN"
+      src="https://cdn.jsdelivr.net/gh/F0T0ne/Image/logo.jpg">
+  <p class="site-author-name" itemprop="name">CTF-DUAN</p>
+  <div class="site-description" itemprop="description">CTF学习</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CTF-DUAN</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>  -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
